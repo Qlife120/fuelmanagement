@@ -9,7 +9,7 @@ function AddEngine() {
     e.preventDefault();
 
     axios
-      .post("/api/newengine", { matricule, model })
+      .post("/api/newengine?matricule="+matricule+"&engineName="+model)  //, { matricule, model })
       .then((res) => console.log(res.data))
       .catch((err) => console.error(err));
   };

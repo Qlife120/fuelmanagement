@@ -10,7 +10,7 @@ function AddConsumption() {
     e.preventDefault();
 
     axios
-      .post("/api/newconsumption", { matricule, consumptionDate, consumption })
+      .post("/api/newconsumption?matricule="+matricule+"&consumptionDate="+consumptionDate+"&consumption="+consumption)
       .then((res) => console.log(res.data))
       .catch((err) => console.error(err));
   };
