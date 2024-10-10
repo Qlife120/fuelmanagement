@@ -1,56 +1,58 @@
-import React, { useState } from "react";
-import AddEngine from "./AddEngine";
-import AddConsumption from "./AddConsumption";
-import GetEngineConsumptions from "./GetEngineConsumptions";
-import CalculateTotalConsumption from "./CalculateTotalConsumption";
-import "./App.css";
-
-function App() {
-  const [view, setView] = useState("addEngine");
+import React, { useState } from 'react';
+import AddConsumption from './components/AddConsumption';
+import Overview from './components/Overview';
+import AddEngine from './components/AddEngine';
+import "./styles/App.css"
+const App = () => {
+  const [view, setView] = useState('addConsumption');
 
   return (
     <div className="app-container">
+      {/* Header */}
       <header className="app-header">
-        {/* Company Logo */}
         <img
-          src="/images/logo.png"  // Assuming you have a logo image in a public folder
+          src="logo.png" // Assuming you have a logo image in a public folder
           alt="Logo de la société"
           className="logo"
         />
-        <h1>Système de Gestion de Flotte</h1>
+        <h2>Système de Gestion de Flotte</h2>
       </header>
 
-      {/* Navigation Bar */}
-      <nav className="navbar">
-        <button onClick={() => setView("addEngine")}>
-          <i className="fas fa-car"></i> Ajouter un Moteur
+      {/* Toggle Navigation Bar */}
+      <div className="toggle-container">
+        <button
+          className={`toggle-button ${view === 'addConsumption' ? 'active' : ''}`}
+          onClick={() => setView('addConsumption')}
+        >
+          <i className="fas fa-gas-pump"></i> Ajout de Consommation
         </button>
-        <button onClick={() => setView("addConsumption")}>
-          <i className="fas fa-gas-pump"></i> Ajouter Consommation
+        <button
+          className={`toggle-button ${view === 'overview' ? 'active' : ''}`}
+          onClick={() => setView('overview')}
+        >
+          <i className="fas fa-list"></i> Aperçu
         </button>
-        <button onClick={() => setView("viewConsumptions")}>
-          <i className="fas fa-list"></i> Voir Consommations
+        <button
+          className={`toggle-button ${view === 'addEngine' ? 'active' : ''}`}
+          onClick={() => setView('addEngine')}
+        >
+          <i className="fas fa-car"></i> Ajout de Moteur
         </button>
-        <button onClick={() => setView("totalConsumption")}>
-          <i className="fas fa-chart-line"></i> Consommation Totale
-        </button>
-      </nav>
+      </div>
 
-      {/* Dynamic Content */}
-      <main className="content">
-        {view === "addEngine" && <AddEngine />}
-        {view === "addConsumption" && <AddConsumption />}
-        {view === "viewConsumptions" && <GetEngineConsumptions />}
-        {view === "totalConsumption" && <CalculateTotalConsumption />}
+      {/* Unified Content Area */}
+      <main className="content-container">
+        {view === 'addConsumption' && <AddConsumption />}
+        {view === 'overview' && <Overview />}
+        {view === 'addEngine' && <AddEngine />}
       </main>
 
-      {/* Footer */}
-      <footer className="app-footer">
-        <img src="/images/logo-footer.png" alt="Logo du pied de page" className="footer-logo" />
-        <p>© 2024 Gestion de Flotte. Tous droits réservés.</p>
-      </footer>
+      {/* Optional Footer */}
+      {/* <footer className="app-footer">
+        <p>&copy; 2024 Gestion de Flotte. Tous droits réservés.</p>
+      </footer> */}
     </div>
   );
-}
+};
 
 export default App;
