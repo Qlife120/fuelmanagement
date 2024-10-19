@@ -1,19 +1,21 @@
 import React, { useState } from "react";
-import axios from "axios";
-import "../styles/AddEngine.css";
+import {addEngine} from "../services/engineService.js";
+import "../styles/AddEngineForm.css";
 
-function AddEngine() {
+function AddEngineForm() {
   const [matricule, setMatricule] = useState("");
   const [model, setModel] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    axios
-      .post("/api/newengine?matricule="+matricule+"&engineName="+model)  //, { matricule, model })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error(err));
-  };
+    try {
+      const newEngine = await addEngine(matricule, model);
+      alert("Moteur ajouté avec succès.");
+      console.log("Nouveau moteur:", newEngine);
+    } catch (error) {
+      alert("Erreur lors de l'ajout du moteur. Veuillez réessayer.");
+      console.log(error);
+    }}
 
   return (
     <div className="form-container">
@@ -39,10 +41,19 @@ function AddEngine() {
             className="input-field"
           />
         </div>
+        {/* <div className="form-group">
+          <label>Description du moteur <i>(Optionnel)</i>:</label>
+          <input
+            type="text"
+            value={model}
+            // onChange={(e) => setModel(e.target.value)}
+            className="input-field"
+          />
+        </div> */}
         <button type="submit" className="submit-btn">Ajouter le moteur</button>
       </form>
     </div>
   );
 }
 
-export default AddEngine;
+export default AddEngineForm;

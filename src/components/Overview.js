@@ -1,53 +1,68 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import axios from 'axios';
+import Chart from 'chart.js/auto';
+import {getTotalConsumptionCurrentMonth, getMaxConsumptionOfMonth, getGraphConsumptions}  from "../services/consumptionService.js";
+import {getTotalEngines}  from "../services/engineService.js";
 import '../styles/Overview.css'; // Import the updated CSS styles
 
 const Overview = () => {
   // State to hold key numbers and chart data
-//   const [keyNumbers, setKeyNumbers] = useState([]);
-//   const [chartData, setChartData] = useState({ labels: [], datasets: [] });
+  const [keyNumbers, setKeyNumbers] = useState([]);
+  useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const totalConsumptionCurrentMonth = await getTotalConsumptionCurrentMonth(); // Replace with your API endpoint
+            const totalEngines = await getTotalEngines(); // Replace with your API endpoint
+            const maxConsumptionOfMonth = await getMaxConsumptionOfMonth();
+            console.log(maxConsumptionOfMonth);
+
+            setKeyNumbers([
+              { title: 'Total des moteurs ', value: `${totalEngines} ` },
+              { title: 'Total des Consommations -Dernier mois- ', value: `${totalConsumptionCurrentMonth} ` },
+              { title: 'Maximum des Consommations -Dernier mois- ', value: `${maxConsumptionOfMonth.second} (${maxConsumptionOfMonth.first}) ` }])
+
+            } catch (error) {
+                      console.error("Error fetching data from API:", error);
+                    }};
+              
+                  fetchData(); // Call the fetch function
+                }, []);
+    
+            
+  // const [chartData, setChartData] = useState({ labels: [], datasets: [] });
 
   // Fetch data from API
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await axios.get('/api/consumption-data'); // Replace with your API endpoint
-//         const data = response.data;
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const graphConsumptions = await getGraphConsumptions();
+  //       console.log(graphConsumptions);
+        // Process the chart data
+        // setChartData({
+        //   labels: data.days, // Example: ['Day 1', 'Day 2', ...]
+        //   datasets: [
+        //     {
+        //       label: 'Consumption per Day (kWh)',
+        //       data: data.dailyConsumption, // Example: [120, 90, 100, ...]
+        //       fill: false,
+        //       borderColor: '#6a1b9a',
+        //       tension: 0.1,
+        //     },
+        //   ],
+        // });
+  //     } catch (error) {
+  //       console.error("Error fetching data from API:", error);
+  //     }
+  //   };
 
-//         // Process the data to set key numbers
-//         setKeyNumbers([
-//           { title: 'Total Consumption', value: `${data.totalConsumption} kWh` },
-//           { title: 'Average Daily Consumption', value: `${data.averageDailyConsumption} kWh` },
-//           { title: 'Peak Consumption', value: `${data.peakConsumption} kWh` },
-//         ]);
+  //   fetchData(); // Call the fetch function
+  // }, []); // Empty dependency array to run only once
 
-//         // Process the chart data
-//         setChartData({
-//           labels: data.days, // Example: ['Day 1', 'Day 2', ...]
-//           datasets: [
-//             {
-//               label: 'Consumption per Day (kWh)',
-//               data: data.dailyConsumption, // Example: [120, 90, 100, ...]
-//               fill: false,
-//               borderColor: '#6a1b9a',
-//               tension: 0.1,
-//             },
-//           ],
-//         });
-//       } catch (error) {
-//         console.error("Error fetching data from API:", error);
-//       }
-//     };
-
-//     fetchData(); // Call the fetch function
-//   }, []); // Empty dependency array to run only once
-
-  const keyNumbers = [
-    { title: 'Total Consumption', value: '1,245 kWh' },
-    { title: 'Average Daily Consumption', value: '85 kWh' },
-    { title: 'Peak Consumption', value: '150 kWh' }
-  ];
+  // const keyNumbers = [
+  //   { title: 'Total Consumption', value: '1,245 kWh' },
+  //   { title: 'Average Daily Consumption', value: '85 kWh' },
+  //   { title: 'Peak Consumption', value: '150 kWh' }
+  // ];
 
   const chartData = {
     labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],

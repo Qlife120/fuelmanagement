@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import AddConsumption from './components/AddConsumption';
+import AddConsumptionForm from './components/AddConsumptionForm';
 import Overview from './components/Overview';
-import AddEngine from './components/AddEngine';
+import AddEngineForm from './components/AddEngineForm';
+import ThemeToggle from './components/ThemeToggle';
 import "./styles/App.css"
 const App = () => {
-  const [view, setView] = useState('addConsumption');
+  const [view, setView] = useState('overview');
 
   return (
     <div className="app-container">
@@ -15,7 +16,8 @@ const App = () => {
           alt="Logo de la société"
           className="logo"
         />
-        <h2>Système de Gestion de Flotte</h2>
+        <h2>Système de Gestion de ...</h2>
+        <ThemeToggle/>
       </header>
 
       {/* Toggle Navigation Bar */}
@@ -42,14 +44,14 @@ const App = () => {
 
       {/* Unified Content Area */}
       <main className="content-container">
-        {view === 'addConsumption' && <AddConsumption />}
+        {view === 'addConsumption' && <AddConsumptionForm />}
         {view === 'overview' && <Overview />}
-        {view === 'addEngine' && <AddEngine />}
+        {view === 'addEngine' && <AddEngineForm />}
       </main>
 
       {/* Optional Footer */}
       {/* <footer className="app-footer">
-        <p>&copy; 2024 Gestion de Flotte. Tous droits réservés.</p>
+        <p>&copy; 2024 Gestion de .. . Tous droits réservés.</p>
       </footer> */}
     </div>
   );

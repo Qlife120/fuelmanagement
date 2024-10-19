@@ -1,0 +1,29 @@
+Suppose you have two stylesheets: base.css and theme.css.
+
+base.css: This is your general stylesheet with common styles.
+theme.css: This is a specific stylesheet that you want to import into base.css.
+In base.css, you can import theme.css like this:
+
+css
+Copy code
+/* base.css */
+@import url('theme.css');
+
+/* Other styles for base.css */
+body {
+  font-family: 'Arial', sans-serif;
+}
+Notes:
+Importing Order: Make sure to place the @import statement at the very top of your CSS file before any other rules.
+Performance Consideration: While it's a common practice, relying on @import can slightly increase load times because 
+the browser has to make an extra request. To avoid this, it's generally better to link both stylesheets directly in 
+your HTML file using the <link> tag, especially for large projects.
+
+##
+Reset to a specific commit:
+git reset --hard <commit-hash>
+This command moves your branch pointer (e.g., master or main) to the specified commit and discards all changes made in the commits after it. The commits after the reset will no longer be part of your branch history.
+
+Force Push to Remote (if applicable): If the branch is shared with a remote repository and you want to update the remote to reflect this reset, you’ll need to force-push:
+git push --force
+This will rewrite the remote history to match your local history, effectively deleting the commits after the reset.

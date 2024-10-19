@@ -1,10 +1,12 @@
+@import url('Global.css');
+
 /* Container for the entire overview page */
 .container {
-    padding: 2%;
+    /* padding: 2%; */
     width: 100%;
     height: auto;
-    background-color: #2c2c2c; /* Dark grey background */
-    color: #e0e0e0; /* Light grey text for consistency */
+    background-color: var(--background-color); /* Dark grey background */
+    color: var(--text-color); /* Light grey text for consistency */
   }
   
   /* Cards container - Flexbox layout */
@@ -20,8 +22,8 @@
   .card {
     flex: 1;
     padding: 2%;
-    background-color: #1f1f1f; /* Slightly darker background for the cards */
-    border-left: 4px solid #00adb5; /* Light cyan accent on the left border */
+    background-color: var(--background3-color); /* Slightly darker background for the cards */
+    border-left: 4px solid var(--button-color); /* Light cyan accent on the left border */
     border-radius: 3px; /* Pointy edges */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for elevation */
     text-align: center;
@@ -37,7 +39,7 @@
   /* Card titles */
   .card h3 {
     font-size: 1.2rem;
-    color: #e0e0e0; /* Light grey for readability */
+    color: var(--button-color); /* Light grey for readability */
     margin-bottom: 10px;
   }
   
@@ -45,19 +47,19 @@
   .card-value {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #00adb5; /* Light cyan for values to pop */
+    color: var(--text-color); /* Light cyan for values to pop */
   }
   
   /* Chart container */
   .chart-container {
     width: 90%;
     height: 300px; /* Adjust based on desired height */
-    background-color: #1f1f1f; /* Darker background for the chart */
+    background-color: var(--background3-color); /* Darker background for the chart */
     padding: 2%;
     margin: 0 auto;
     border-radius: 3px; /* Pointy edges */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Consistent shadow */
-    border-left: 4px solid #00adb5; /* Light cyan accent */
+    border-left: 4px solid var(--button-color); /* Light cyan accent */
   }
   
   /* Chart and its titles */
