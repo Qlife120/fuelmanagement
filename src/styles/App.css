@@ -83,14 +83,14 @@
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); Subtle shadow for a professional touch */
   border-left: 4px solid var(--button-color); /* Light cyan accent */
   width: 90%;
-  padding: 20px;
+  padding: 5px;
   margin-top: 15px;
   background-color: var(--background2-color); /* Slightly lighter dark grey */
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   /* border-radius: 0 0 10px 10px; Pointy edges on top, rounded bottom */
   color: var(--text-color);
   box-sizing: border-box;
-  height: calc(100vh - 140px); /* Dynamic height adjustment to fit screen */
+  /* height: calc(100vh - 140px); Dynamic height adjustment to fit screen */
   overflow-y: auto; /* Auto-scroll only if content overflows */
 }
 

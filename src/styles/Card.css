@@ -1,0 +1,45 @@
+@import url('Global.css');
+
+  /* Individual card styling */
+  .card {
+    flex: 1;
+    padding: 2%;
+    background-color: var(--background3-color); /* Slightly darker background for the cards */
+    border-left: 4px solid var(--button-color); /* Light cyan accent on the left border */
+    border-radius: 3px; /* Pointy edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for elevation */
+    text-align: center;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Card hover effect */
+  .card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow on hover */
+    transform: translateY(-5px); /* Slight lift on hover */
+  }
+  
+  /* Card titles */
+  .card h3 {
+    font-size: 1.2rem;
+    color: var(--button-color); /* Light grey for readability */
+    margin-bottom: 10px;
+  }
+  
+  /* Card values */
+  .card-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-color); /* Light cyan for values to pop */
+  }
+  
+  @media (max-width: 768px) {
+
+    .card {
+      padding: 4%;
+      font-size: 90%;
+    }
+  
+    .card-value {
+      font-size: 1.2rem;
+    }
+  }

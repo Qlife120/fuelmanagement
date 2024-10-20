@@ -1,29 +1,33 @@
 import React, { useState, useEffect } from "react";
+import Alert from '@mui/material/Alert';
 import {addConsumption,} from "../services/consumptionService.js";
 import {getAllEngines, } from "../services/engineService.js";
-import "../styles/AddConsumptionForm.css";
+import "../styles/Form.css";
 
-function AddConsumptionForm() {
-  // const [matricule, setMatricule] = useState("");
+function AddConsumptionForm({refreshData}) {
+
   const [consumptionDate, setConsumptionDate] = useState("");
   const [consumption, setConsumption] = useState(0);
 
-    const [matricules, setMatricules] = useState([]);
-    const [selectedMatricule, setSelectedMatricule] = useState('');
+  const [matricules, setMatricules] = useState([]);
+  const [selectedMatricule, setSelectedMatricule] = useState('');
+
+  const [alertSeverity, setAlertSeverity] = useState(null);
   
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const listEnginesData = await getAllEngines(); // Fetching engine data from API
-          const listMatricules = listEnginesData.map(engine => engine.matricule); // Extracting matricules
-          setMatricules(listMatricules); // Setting the matricules state
-        } catch (error) {
-          console.error("Error retrieving the list of engines:", error);
-        }
-      };
-  
-      fetchData(); // Call the fetch function
-    }, []); // Empty dependency array to run on mount only
+  // For retrieving array of matricules for the select list
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const listEnginesData = await getAllEngines(); // Fetching engine data from API
+        const listMatricules = listEnginesData.map(engine => engine.matricule); // Extracting matricules
+        setMatricules(listMatricules); // Setting the matricules state
+      } catch (error) {
+        console.error("Error retrieving the list of engines:", error);
+      }
+    };
+
+    fetchData(); // Call the fetch function
+  }, []); // Empty dependency array to run on mount only
   
     const handleSelectChange = (event) => {
       setSelectedMatricule(event.target.value);
@@ -32,12 +36,21 @@ function AddConsumptionForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newConsumption = await addConsumption(selectedMatricule, consumption, consumptionDate);
-      alert("Consommation ajoutée avec succès.");
-      console.log("Nouvelle consommation:", newConsumption);
+      await addConsumption(selectedMatricule, consumption, consumptionDate);
+      setAlertSeverity('success');
+      refreshData();
+      // Clear the alert after 3 seconds (3000 ms)
+      setTimeout(() => {
+        setAlertSeverity(null);
+      }, 3000);
+
     } catch (error) {
-      alert("Erreur lors de l'ajout de la consommation. Veuillez réessayer.");
-      console.log(error);
+      setAlertSeverity('error');
+
+      // Clear the alert after 3 seconds (3000 ms)
+      setTimeout(() => {
+        setAlertSeverity(null);
+      }, 3000);
     }}
 
   return (
@@ -75,8 +88,17 @@ function AddConsumptionForm() {
           />
         </div>
         <button type="submit" className="submit-btn">Ajouter la consommation</button>
+        <div className="alert">
+        {alertSeverity === 'success' && (
+        <Alert severity="success" variant="outlined" onClose={() => {}}>Consommation ajoutée avec succès.</Alert>
+        )}
+        {alertSeverity === 'error' && (
+          <Alert severity="error" variant="outlined" onClose={() => {}}>Erreur lors de l'ajout de la consommation. Veuillez réessayer.</Alert>
+        )}
+        </div>
       </form>
     </div>
+    
   );
 }
 

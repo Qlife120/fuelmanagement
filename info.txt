@@ -27,3 +27,12 @@ This command moves your branch pointer (e.g., master or main) to the specified c
 Force Push to Remote (if applicable): If the branch is shared with a remote repository and you want to update the remote to reflect this reset, you’ll need to force-push:
 git push --force
 This will rewrite the remote history to match your local history, effectively deleting the commits after the reset.
+
+
+Modifications:
+50% css for fields.
+10 last rows table next to it.
+Styles of the navbar elements.
+Form next to the graph and calculate total consumptions 2 dates.
+global env
+responsiveness monitor size

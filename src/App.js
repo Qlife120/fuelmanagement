@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import AddConsumptionForm from './components/AddConsumptionForm';
-import Overview from './components/Overview';
-import AddEngineForm from './components/AddEngineForm';
+import ConsumptionPage from './pages/ConsumptionPage.js';
+import OverviewPage from './pages/OverviewPage.js';
+import EnginePage from './pages/EnginePage.js';
 import ThemeToggle from './components/ThemeToggle';
 import "./styles/App.css"
 const App = () => {
@@ -44,9 +44,9 @@ const App = () => {
 
       {/* Unified Content Area */}
       <main className="content-container">
-        {view === 'addConsumption' && <AddConsumptionForm />}
-        {view === 'overview' && <Overview />}
-        {view === 'addEngine' && <AddEngineForm />}
+        {view === 'addConsumption' && <ConsumptionPage />}
+        {view === 'overview' && <OverviewPage />}
+        {view === 'addEngine' && <EnginePage />}
       </main>
 
       {/* Optional Footer */}

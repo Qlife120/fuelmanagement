@@ -1,0 +1,19 @@
+
+.last-engines-table {
+    margin: 20px;
+  }
+  
+  .last-engines-table table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+  }
+  
+  .last-engines-table th, .last-engines-table td {
+    padding: 10px;
+    border: 1px solid var(--button-color);
+  }
+  
+  .last-engines-table th {
+    background-color: var(--background3-color);
+  }

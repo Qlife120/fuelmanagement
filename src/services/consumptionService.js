@@ -25,7 +25,7 @@ export const getAllConsumptionsByEngine = async (matricule) => {
 };
 
 // Calculate total consumption between two dates for a specific engine
-export const calculateTotalConsumption = async (matricule, startDate, endDate) => {
+export const calculateTotalConsumption = async (matricule, startDate='2024-10-01', endDate = new Date().toISOString().split('T')[0]) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/totalconsumptiondates?matricule=${matricule}&startDate=${startDate}&endDate=${endDate}`, );
     return response.data;

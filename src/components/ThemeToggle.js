@@ -27,7 +27,7 @@ const ThemeToggle = () => {
   return (
     <div>
       <button onClick={toggleTheme} className='toggle-button active'>
-        {isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+        {isDarkMode ? 'Mode Clair' : 'Mode Sombre'}
       </button>
     </div>
   );

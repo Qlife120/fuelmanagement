@@ -1,0 +1,32 @@
+.page-container {
+    display: flex;
+    justify-content: space-between; /* Adds space between the components */
+    align-items: flex-start; /* Aligns the components at the top */
+    gap: 20px; /* Adds spacing between the form and the table */
+    padding: 20px;
+  }
+  
+  .form-section {
+    flex: 1; /* Take equal space */
+    max-width: 45%; /* Control the width of the form */
+  }
+  
+  .table-section {
+    flex: 1; /* Take equal space */
+    max-width: 50%; /* Control the width of the table */
+  }
+  
+  .table-section table {
+    width: 100%;
+  }
+  
+  @media (max-width: 768px) {
+    .side-by-side-container {
+      flex-direction: column; /* Stack the components on smaller screens */
+    }
+  
+    .form-section, .table-section {
+      max-width: 100%; /* Make the sections full width */
+    }
+  }
+  

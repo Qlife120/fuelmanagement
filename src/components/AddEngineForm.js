@@ -1,20 +1,34 @@
 import React, { useState } from "react";
+import Alert from '@mui/material/Alert';
 import {addEngine} from "../services/engineService.js";
-import "../styles/AddEngineForm.css";
+import "../styles/Form.css";
 
-function AddEngineForm() {
+function AddEngineForm({refreshData}) {
+  
   const [matricule, setMatricule] = useState("");
   const [model, setModel] = useState("");
+
+  const [alertSeverity, setAlertSeverity] = useState(null);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const newEngine = await addEngine(matricule, model);
-      alert("Moteur ajouté avec succès.");
-      console.log("Nouveau moteur:", newEngine);
+      await addEngine(matricule, model);
+      setAlertSeverity('success');
+      refreshData();
+      // Clear the alert after 3 seconds (3000 ms)
+      setTimeout(() => {
+        setAlertSeverity(null);
+      }, 3000);
+
     } catch (error) {
-      alert("Erreur lors de l'ajout du moteur. Veuillez réessayer.");
-      console.log(error);
+      setAlertSeverity('error');
+
+      // Clear the alert after 3 seconds (3000 ms)
+      setTimeout(() => {
+        setAlertSeverity(null);
+      }, 3000);
     }}
 
   return (
@@ -41,19 +55,19 @@ function AddEngineForm() {
             className="input-field"
           />
         </div>
-        {/* <div className="form-group">
-          <label>Description du moteur <i>(Optionnel)</i>:</label>
-          <input
-            type="text"
-            value={model}
-            // onChange={(e) => setModel(e.target.value)}
-            className="input-field"
-          />
-        </div> */}
         <button type="submit" className="submit-btn">Ajouter le moteur</button>
+        <div className="alert">
+        {alertSeverity === 'success' && (
+        <Alert severity="success" variant="outlined" onClose={() => {}}>Consommation ajoutée avec succès.</Alert>
+        )}
+        {alertSeverity === 'error' && (
+          <Alert severity="error" variant="standard" onClose={() => {}}>Erreur lors de l'ajout de la consommation. Veuillez réessayer.</Alert>
+        )}
+        </div>
       </form>
     </div>
-  );
+    
+      );
 }
 
 export default AddEngineForm;
