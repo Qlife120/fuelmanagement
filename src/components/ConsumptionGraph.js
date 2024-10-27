@@ -1,56 +1,78 @@
 import React, { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
-import 'chart.js/auto';  // Automatically register the required chart components
+import 'chart.js/auto';
 import '../styles/Chart.css';
+import { addDays } from 'date-fns';
 
 function ConsumptionGraph({ consumptionData }) {
-  const [chartData, setChartData] = useState({});
+  
+  const [chartData, setChartData] = useState({
+    labels: [],
+    datasets: [{ label: 'Consommations par dates', data: [], borderColor: 'rgb(75, 192, 192)' }],
+  });
+
+  const generateDateRange = (startDate, endDate, step = 1) => {
+    const dates = [];
+    let currentDate = new Date(startDate);
+    while (currentDate <= new Date(endDate)) {
+      dates.push(currentDate);
+      currentDate = addDays(currentDate, step);
+    }
+    return dates;
+  };
 
   useEffect(() => {
-    // Extract the data to be used in the graph
-    const dates = consumptionData.map(item => item.consumptionDate);
-    const consumptionValues = consumptionData.map(item => item.consumption);
+    console.log(2);
+    if (consumptionData && consumptionData.arrayConsumptions && consumptionData.startDate && consumptionData.endDate) {
 
-    // Prepare the chart data
-    const data = {
-      labels: dates, // X-axis labels (dates)
-      datasets: [
-        {
-          label: 'Consumption over time',
-          data: consumptionValues, // Y-axis data (consumption values)
-          fill: false,
-          borderColor: 'rgb(75, 192, 192)',
-          tension: 0.1,
-        },
-      ],
-    };
+    const { startDate, endDate, arrayConsumptions } = consumptionData;
 
-    setChartData(data);
+// Step 1: Generate all dates as strings, merging with consumption dates
+const availableDates = arrayConsumptions.map(item => item.consumptionDate);
+const generatedDateStrings = generateDateRange(new Date(startDate), new Date(endDate), 1)
+  .map(date => date.toISOString().split('T')[0]); // generate dates as strings
+const allDateStringsSet = new Set([...availableDates, ...generatedDateStrings]);
+const allDateStrings = Array.from(allDateStringsSet).sort(); // sorted unique date strings
+
+// Step 2: Align consumptions with all dates
+const availableConsumptions = arrayConsumptions.reduce((acc, item) => {
+  acc[item.consumptionDate] = item.consumption;
+  return acc;
+}, {});
+
+const alignedConsumptionData = allDateStrings.map(dateStr => availableConsumptions[dateStr] || 0);
+
+// Step 3: Construct chart data with aligned data
+const data = {
+  labels: allDateStrings,
+  datasets: [
+    {
+      label: 'Consommations par dates',
+      data: alignedConsumptionData,
+      fill: false,
+      borderColor: 'rgb(75, 192, 192)',
+      tension: 0.1,
+    },
+  ],
+};
+
+    setChartData(data);}
   }, [consumptionData]);
 
+  
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'Days',
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: 'Consumption (kWh)',
-        },
-        beginAtZero: true,
-      },
+      x: { title: { display: true, text: 'Dates' } },
+      y: { title: { display: true, text: 'Consommations' }, beginAtZero: true },
     },
   };
+  console.log('graphe:',chartData);
   return (
     <div className='chart'>
-      <h2>Graphe de Consommation</h2>
-      <Line data={chartData} options={chartOptions}/>
+      {/* <h2>Graphe de Consommation</h2> */}
+      <Line data={chartData}  />
     </div>
   );
 }

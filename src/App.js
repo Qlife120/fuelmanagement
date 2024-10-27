@@ -3,7 +3,9 @@ import ConsumptionPage from './pages/ConsumptionPage.js';
 import OverviewPage from './pages/OverviewPage.js';
 import EnginePage from './pages/EnginePage.js';
 import ThemeToggle from './components/ThemeToggle';
-import "./styles/App.css"
+import "./styles/App.css";
+import { Line } from 'react-chartjs-2';
+import ConsumptionGraph from './components/ConsumptionGraph.js';
 const App = () => {
   const [view, setView] = useState('overview');
 
@@ -55,6 +57,15 @@ const App = () => {
       </footer> */}
     </div>
   );
+  // const [data, setData] = useState({});
+  // const t = {
+  //   labels: [],
+  //   datasets: [{ label: 'Consumption over time', data: [], borderColor: 'rgb(75, 192, 192)' }],
+  // };
+  // return(
+  //   // <Line data={t} />
+  //  <ConsumptionGraph consumptionData={data}/>
+  // )
 };
 
 export default App;

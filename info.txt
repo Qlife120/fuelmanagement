@@ -36,3 +36,4 @@ Styles of the navbar elements.
 Form next to the graph and calculate total consumptions 2 dates.
 global env
 responsiveness monitor size
+

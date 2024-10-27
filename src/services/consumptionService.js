@@ -25,7 +25,7 @@ export const getAllConsumptionsByEngine = async (matricule) => {
 };
 
 // Calculate total consumption between two dates for a specific engine
-export const calculateTotalConsumption = async (matricule, startDate='2024-10-01', endDate = new Date().toISOString().split('T')[0]) => {
+export const calculateTotalConsumption = async (matricule, startDate, endDate) => {
   try {
     const response = await axios.get(`${API_BASE_URL}/totalconsumptiondates?matricule=${matricule}&startDate=${startDate}&endDate=${endDate}`, );
     return response.data;
@@ -35,12 +35,10 @@ export const calculateTotalConsumption = async (matricule, startDate='2024-10-01
   }
 };
 
-// Get the list of consumptions of an engine between two dates
-export const getGraphConsumptions = async (matricule, startDate='2024-10-01', endDate = new Date().toISOString().split('T')[0]) => {
+// Get the list of consumptions of an engine between two dates='2024-10-01' new Date().toISOString().split('T')[0]
+export const getGraphConsumptions = async (matricule, startDate, endDate ) => {
   try {
-    const response = await axios.get(`${API_BASE_URL}/graphconsumptions?matricule=${matricule}&startDate=${startDate}&endDate=${endDate}`, {
-      params: { matricule, startDate, endDate }
-    });
+    const response = await axios.get(`${API_BASE_URL}/graphconsumptions?matricule=${matricule}&startDate=${startDate}&endDate=${endDate}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching graph consumptions:", error);

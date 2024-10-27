@@ -4,8 +4,8 @@ import "../styles/Table.css";
 function TableEngines({lastEngines}) {
 
     return(
-        <div className="component last-engines-table">
-            <h2>Derniers moteurs ajoutés</h2>
+        <div className="component last-elements-table">
+            <h2>Derniers Moteurs Ajoutés</h2>
             <table>
                 <thead>
                 <tr>

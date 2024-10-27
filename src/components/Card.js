@@ -2,12 +2,12 @@ import React  from 'react';
 
 import '../styles/Card.css'; // Import the updated CSS styles
 
-function Card({index, item}) {
+function Card({title, value}) {
 
 return(
-    <div key={index} className="card">
-            <h3>{item.title}</h3>
-            <p className="card-value">{item.value}</p>
+    <div className="card">
+            <h3>{title}</h3>
+            <p className="card-value">{value}</p>
           </div>
 )}
 

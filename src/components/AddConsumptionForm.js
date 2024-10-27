@@ -21,6 +21,7 @@ function AddConsumptionForm({refreshData}) {
         const listEnginesData = await getAllEngines(); // Fetching engine data from API
         const listMatricules = listEnginesData.map(engine => engine.matricule); // Extracting matricules
         setMatricules(listMatricules); // Setting the matricules state
+        if (listMatricules.length > 0) setSelectedMatricule(listMatricules[0]);
       } catch (error) {
         console.error("Error retrieving the list of engines:", error);
       }

@@ -5,8 +5,8 @@ import "../styles/Table.css";
 function TableConsumptions({lastConsumptions}) {
 
     return(
-        <div className="component last-consumptions-table">
-            <h2>Derniers moteurs ajoutés</h2>
+        <div className="component last-elements-table">
+            <h2>Dernières Consommations Ajoutées</h2>
             <table>
                 <thead>
                 <tr>
